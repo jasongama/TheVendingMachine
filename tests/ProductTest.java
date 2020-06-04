@@ -1,8 +1,5 @@
 import org.junit.Test;
-import vending.product.Chocolate;
-import vending.product.Product;
-import vending.product.SaltySnack;
-import vending.product.SoftDrink;
+import vending.product.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -73,6 +70,21 @@ public class ProductTest {
         addSoftDrink.setGetStock(new Chocolate());
         assertEquals(5, addSoftDrink.getChocolate());
     }
+
+    @Test
+    public void shouldAddJuices() {
+
+        Juice addSoftDrink = new Juice();
+
+        addSoftDrink.setGetStock(new Juice());
+        addSoftDrink.setGetStock(new Juice());
+        addSoftDrink.setGetStock(new Juice());
+        addSoftDrink.setGetStock(new Juice());
+        addSoftDrink.setGetStock(new Juice());
+        assertEquals(5, addSoftDrink.getJuiceStock());
+    }
+
+
     @Test
     public void shouldNotAddProduct() {
 

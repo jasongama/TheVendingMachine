@@ -1,23 +1,22 @@
 package vending;
 
-import vending.product.Chocolate;
-import vending.product.Product;
-import vending.product.SaltySnack;
-import vending.product.SoftDrink;
+import vending.product.*;
 
 public class ExtendableVendingMachine {
-    public static int softDrink = 0;
-    public static int chocolate = 0;
-    public static int saltySnack = 0;
+    private int softDrink = 0;
+    private int chocolate = 0;
+    private int saltySnack = 0;
+    private int juice = 0;
 
-    public ExtendableVendingMachine(int saltySnack, int chocolate, int softDrink) {
+    public ExtendableVendingMachine(int saltySnack, int chocolate, int softDrink, int juice) {
         this.chocolate = saltySnack;
         this.saltySnack = chocolate;
         this.softDrink = softDrink;
-
+        this.juice = juice;
     }
 
-    public static void buy(Product product) {
+
+    public void buy(Product product) {
         //The java instanceof operator is used to test whether the object is an instance of the specified type
         // (class or subclass or interface).
         if (product instanceof SoftDrink && softDrink > 0) {
@@ -26,29 +25,34 @@ public class ExtendableVendingMachine {
             saltySnack -= 1;
         } else if (product instanceof Chocolate && chocolate > 0) {
             chocolate -= 1;
+        } else if (product instanceof Juice) {
+            juice -= 1;
         }
     }
 
-    public static void addStock(Product product) {
+
+    public void addStock(Product product) {
         if (product instanceof SaltySnack) {
             saltySnack += 1;
         } else if (product instanceof SoftDrink) {
             softDrink += 1;
-
         } else if (product instanceof Chocolate) {
-
             chocolate += 1;
+        } else if (product instanceof Juice) {
+            juice += 1;
         }
 
     }
 
-    public static int getStock(Product product) {
+    public int getStock(Product product) {
         if (product instanceof SoftDrink) {
             return softDrink;
         } else if (product instanceof Chocolate) {
             return chocolate;
         } else if (product instanceof SaltySnack) {
             return saltySnack;
+        } else if (product instanceof Juice) {
+            return juice;
         } else {
             return 0;
         }
@@ -56,39 +60,53 @@ public class ExtendableVendingMachine {
 
 
     public static void main(String[] args) {
-
-        System.out.println("You haven't selected a product " + getStock(new Product()));
+        ExtendableVendingMachine addProduct = new ExtendableVendingMachine(3, 0, 0, 0);
+        System.out.println("You haven't selected a product " + addProduct.getStock(new Product()));
 
         System.out.println("\nThank you for purchasing SaltySnack");
-        addStock(new SaltySnack());
-        addStock(new SaltySnack());
-        addStock(new SaltySnack());
-        buy(new SaltySnack());
+        ExtendableVendingMachine products = new ExtendableVendingMachine(3, 0, 0, 0);
+        products.addStock(new SaltySnack());
+        products.addStock(new SaltySnack());
+        products.addStock(new SaltySnack());
+        products.addStock(new SaltySnack());
+        products.buy(new SaltySnack());
 
-        System.out.println("You have purchase " + getStock(new SaltySnack()) + " Salty Snacks");
+        System.out.println("You have purchase " + products.getStock(new SaltySnack()) + " Salty Snacks");
 
-        System.out.println("\nThank you for purchasing SoftDrinks");
-        addStock(new SoftDrink());
-        addStock(new SoftDrink());
-        addStock(new SoftDrink());
-        addStock(new SoftDrink());
-        buy(new SoftDrink());
+        System.out.println("\nThank you for   purchasing SoftDrinks");
+        ExtendableVendingMachine product = new ExtendableVendingMachine(3, 0, 5, 0);
+        product.addStock(new SoftDrink());
+        product.addStock(new SoftDrink());
+        product.addStock(new SoftDrink());
+        product.addStock(new SoftDrink());
+        product.addStock(new SoftDrink());
+        product.addStock(new SoftDrink());
+        product.buy(new SoftDrink());
 
-        System.out.println("You have purchase " + getStock(new SoftDrink()) + " SoftDrinks");
+        System.out.println("You have purchase " + product.getStock(new SoftDrink()) + " SoftDrinks");
 
         System.out.println("\nThank you for purchasing Chocolates");
-        addStock(new Chocolate());
-        addStock(new Chocolate());
-        addStock(new Chocolate());
-        addStock(new Chocolate());
-        addStock(new Chocolate());
-        addStock(new Chocolate());
-        buy(new Chocolate());
+        ExtendableVendingMachine productStock = new ExtendableVendingMachine(3, 6, 5, 0);
+        productStock.addStock(new Chocolate());
+        productStock.addStock(new Chocolate());
+        productStock.addStock(new Chocolate());
+        productStock.addStock(new Chocolate());
+        productStock.buy(new Chocolate());
 
-        System.out.println("You have purchase " + getStock(new Chocolate()) + " Chocolates");
+        System.out.println("You have purchase " + productStock.getStock(new Chocolate()) + " Chocolates");
 
+        System.out.println("\nThank you for purchasing Juices");
+        ExtendableVendingMachine productStocks = new ExtendableVendingMachine(3, 6, 5, 4);
+        productStocks.addStock(new Juice());
+        productStocks.addStock(new Juice());
+        productStocks.addStock(new Juice());
+        productStocks.addStock(new Juice());
+        productStocks.buy(new Juice());
 
-    }
+        System.out.println("You have purchase " + productStocks.getStock(new Juice()) + " Juices");
 
+        System.out.println("\nThank you for purchasing");
+
+        }
 
 }
