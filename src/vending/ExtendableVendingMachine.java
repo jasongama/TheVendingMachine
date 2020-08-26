@@ -9,8 +9,8 @@ public class ExtendableVendingMachine {
     private int juice = 0;
 
     public ExtendableVendingMachine(int saltySnack, int chocolate, int softDrink, int juice) {
-        this.chocolate = saltySnack;
-        this.saltySnack = chocolate;
+        this.chocolate = chocolate;
+        this.saltySnack = saltySnack;
         this.softDrink = softDrink;
         this.juice = juice;
     }
